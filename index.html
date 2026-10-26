@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f2fb">
+<title>LAB EMOSI — Pahami Emosimu, Pilih Responsmu</title>
+<style>
+:root{
+ --bg:#f8f6fb;--surface:#fff;--ink:#28283a;--muted:#6f7082;--line:#e8e3ef;
+ --lav:#e9e0f7;--lavdeep:#8064a8;--sage:#e1eee5;--sagedeep:#48765a;
+ --peach:#f8e5dc;--peachdeep:#a96048;--butter:#f8f0d8;--blue:#e2edf8;
+ --shadow:0 12px 34px rgba(57,43,77,.07);--radius:22px;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+a{color:inherit;text-decoration:none}.app{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;background:rgba(248,246,251,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topinner{max-width:1180px;margin:auto;padding:12px 22px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;min-width:205px}.brandmark{width:42px;height:42px;border-radius:15px;background:linear-gradient(145deg,#e7dcf7,#dcebe0);display:grid;place-items:center;font-size:22px}
+.brand strong{display:block;font-size:16px;letter-spacing:.04em}.brand small{display:block;color:var(--muted);font-size:11px}
+.nav{display:flex;gap:4px;align-items:center;flex:1;overflow-x:auto;scrollbar-width:none}.nav button{border:0;background:transparent;color:var(--muted);padding:9px 11px;border-radius:12px;white-space:nowrap;font-size:13px}.nav button.active,.nav button:hover{background:#eee8f7;color:#5d467f}
+.top-actions{display:flex;gap:8px;align-items:center}.iconbtn{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 12px;color:var(--muted)}
+main{max-width:1180px;margin:auto;padding:28px 22px 64px}.page{display:none;animation:fade .22s ease}.page.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-weight:750;font-size:11px;color:var(--lavdeep)}
+h1,h2,h3,p{margin-top:0}h1{font-size:clamp(34px,5vw,56px);line-height:1.06;letter-spacing:-.04em;margin-bottom:18px}h2{font-size:clamp(25px,3vw,34px);line-height:1.15;letter-spacing:-.025em;margin-bottom:12px}h3{font-size:18px;line-height:1.25;margin-bottom:9px}
+.lead{font-size:17px;color:var(--muted);max-width:650px}.muted{color:var(--muted)}.small{font-size:13px}.tiny{font-size:11px;color:var(--muted)}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;padding:26px 0 34px}.hero-copy{padding:20px 0}.hero h1 span{color:var(--lavdeep)}
+.hero-art{min-height:340px;border-radius:32px;padding:26px;background:linear-gradient(145deg,#eee5fa 0%,#e4f0e7 60%,#f8eadf 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.orbit{width:235px;height:235px;border-radius:50%;border:1px solid rgba(128,100,168,.25);display:grid;place-items:center;position:relative}
+.orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%;border:1px dashed rgba(128,100,168,.35)}.orbit:before{inset:22px}.orbit:after{inset:46px}
+.face{width:120px;height:120px;border-radius:38px;background:rgba(255,255,255,.82);box-shadow:var(--shadow);display:grid;place-items:center;font-size:54px;transform:rotate(-5deg)}
+.float{position:absolute;padding:10px 14px;border-radius:15px;background:rgba(255,255,255,.86);box-shadow:var(--shadow);font-weight:700;font-size:13px}.f1{top:36px;left:24px}.f2{right:20px;top:100px}.f3{bottom:35px;left:35px}.f4{right:25px;bottom:32px}
+.btn{border:0;border-radius:14px;padding:12px 18px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,box-shadow .15s}.btn:hover{transform:translateY(-1px)}.primary{background:#77609a;color:#fff;box-shadow:0 8px 18px #77609a2b}.secondary{background:#e9e1f5;color:#604982}.sagebtn{background:#e1eee5;color:#3f6e50}.outline{background:white;border:1px solid var(--line);color:var(--ink)}.danger{background:#f9e5e2;color:#984b42}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.buttonrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;background:#fff;border:1px solid var(--line);color:#6b5c83}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 34px}.stat{background:white;border:1px solid var(--line);border-radius:18px;padding:17px}.stat strong{font-size:25px;display:block}.stat span{font-size:12px;color:var(--muted)}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:30px 0 18px}.sectionhead p{margin:0;color:var(--muted);max-width:600px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 5px 18px rgba(57,43,77,.025)}.card.softlav{background:#f0eafa}.card.softsage{background:#eaf3ec}.card.softpeach{background:#fbede7}.card.softblue{background:#eaf1f8}
+.cardicon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:24px;background:rgba(255,255,255,.75);margin-bottom:16px}.card p{color:var(--muted);font-size:14px;margin-bottom:16px}.card .btn{margin-top:4px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{background:white;border:1px solid var(--line);padding:18px;border-radius:18px}.step b{display:block;font-size:13px;letter-spacing:.05em;color:var(--lavdeep)}.step strong{display:block;font-size:16px;margin:6px 0}.step span{font-size:13px;color:var(--muted)}
+.notice{border-radius:16px;padding:14px 16px;background:#f8f0d8;color:#756334;font-size:13px;border:1px solid #eee3bf}.notice.sage{background:#e8f2ea;border-color:#d6e6da;color:#3f6e50}.notice.peach{background:#fbede7;border-color:#f0d9cf;color:#8e5645}
+.pagehead{display:flex;align-items:start;justify-content:space-between;gap:20px;margin:14px 0 26px}.pagehead p{max-width:680px;color:var(--muted)}
+.progresswrap{background:#e8e3ee;height:7px;border-radius:99px;overflow:hidden;margin:15px 0}.progressbar{height:100%;width:0;background:#8a72ad;transition:width .2s}
+.quizlayout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:18px;align-items:start}.quizcard{background:white;border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:var(--shadow)}.qnum{font-size:12px;color:var(--lavdeep);font-weight:800;letter-spacing:.1em}.qtext{font-size:23px;line-height:1.3;margin:12px 0 22px;font-weight:750}.fieldlabel{font-size:13px;font-weight:800;margin:20px 0 10px;display:block}.choices{display:grid;gap:9px}.choice{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;background:white;text-align:left;color:var(--ink);width:100%;font-size:14px}.choice:hover{border-color:#b6a5d1;background:#fcfaff}.choice.selected{border-color:#9278b7;background:#f0eafa;box-shadow:inset 0 0 0 1px #9278b7}.choice .letter{flex:0 0 25px;height:25px;border-radius:8px;background:#f1eef5;display:grid;place-items:center;font-weight:800;font-size:12px;color:#66547f}.choice.selected .letter{background:#8064a8;color:white}
+.quizside{display:grid;gap:14px}.sidebox{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.sidebox strong{font-size:14px}.sidebox p{font-size:13px;color:var(--muted);margin:7px 0 0}.qjump{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}.qjump button{border:1px solid var(--line);background:white;border-radius:8px;padding:7px 0;font-size:11px;color:var(--muted)}.qjump button.done{background:#e5efe7;border-color:#c7dfcd;color:#3f6e50}.qjump button.current{outline:2px solid #9278b7;color:#5d467f}
+.quiznav{display:flex;justify-content:space-between;gap:10px;margin-top:24px}
+.materialgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.material{border-radius:22px;padding:24px;background:white;border:1px solid var(--line)}.material .number{font-size:12px;font-weight:800;color:var(--lavdeep);letter-spacing:.1em}.material p,.material li{font-size:14px;color:var(--muted)}.material ul{padding-left:20px}.formula{display:flex;gap:8px;align-items:stretch;margin:20px 0}.formula div{flex:1;padding:16px 10px;border-radius:15px;text-align:center;background:#f0eafa}.formula div:nth-child(2){background:#e7f1e9}.formula div:nth-child(3){background:#f9e8e0}.formula div:nth-child(4){background:#e7eef7}.formula b{display:block;font-size:18px}.formula span{font-size:11px;color:var(--muted)}
+.simgrid{display:grid;grid-template-columns:1fr 300px;gap:18px}.simmain{display:grid;gap:16px}.simside{display:grid;gap:14px;align-content:start}.codeform{display:flex;gap:8px}.codeform input{min-width:0;flex:1;text-transform:uppercase;letter-spacing:.08em}
+input,textarea,select{border:1px solid #ddd6e7;border-radius:12px;background:white;padding:12px 13px;color:var(--ink);width:100%;outline:none}input:focus,textarea:focus,select:focus{border-color:#9b86bc;box-shadow:0 0 0 3px #eee7f8}textarea{resize:vertical;min-height:90px}
+.scenariobox{background:linear-gradient(145deg,#f0eafa,#e9f2eb);border:1px solid #e0d7eb;border-radius:24px;padding:26px}.scenario-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}.scenario-title{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:12px}.scenario-desc{font-size:16px;max-width:780px}.promptbox{background:rgba(255,255,255,.7);padding:16px;border-radius:16px;margin-top:18px}.promptbox b{font-size:13px}.promptbox p{margin:5px 0 0;font-size:14px}
+.simstep{border:1px solid var(--line);background:white;border-radius:20px;padding:22px}.simstep h3{display:flex;align-items:center;gap:9px}.simstep .tag{width:30px;height:30px;border-radius:10px;background:#eee7f8;display:grid;place-items:center;color:#6c518e;font-size:13px}
+.twofield{display:grid;grid-template-columns:1fr 1fr;gap:12px}.banklist{display:grid;gap:9px}.bankitem{padding:12px;border:1px solid var(--line);border-radius:13px;background:white;font-size:13px}.bankitem button{margin-top:8px;font-size:12px}
+.journalgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.formcard{background:white;border:1px solid var(--line);border-radius:22px;padding:24px}.formrow{margin-bottom:15px}.formrow label{display:block;font-size:13px;font-weight:750;margin-bottom:7px}.savedlist{display:grid;gap:12px}.entry{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.entryhead{display:flex;justify-content:space-between;gap:10px;align-items:start}.emotiontag{font-size:11px;background:#f0eafa;color:#6c518e;padding:5px 9px;border-radius:99px;font-weight:800}.entry h3{font-size:15px;margin:13px 0 5px}.entry p{font-size:13px;color:var(--muted);margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere}.entryactions{display:flex;justify-content:end;margin-top:12px}
+.empty{border:1px dashed #d9d0e4;background:#fbf9fd;border-radius:18px;padding:28px;text-align:center;color:var(--muted);font-size:14px}
+.footer{border-top:1px solid var(--line);padding:24px 22px;color:var(--muted);font-size:12px;text-align:center}
+.modalback{position:fixed;inset:0;background:#28283a77;z-index:50;display:none;align-items:center;justify-content:center;padding:20px}.modalback.show{display:flex}.modal{background:white;border-radius:24px;padding:26px;max-width:440px;width:100%;box-shadow:var(--shadow)}.modal h3{font-size:22px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#28283a;color:white;padding:11px 16px;border-radius:13px;box-shadow:var(--shadow);font-size:13px;z-index:80;display:none;max-width:calc(100vw - 30px)}
+@media(max-width:900px){.topinner{flex-wrap:wrap;gap:10px}.brand{min-width:unset;flex:1}.nav{order:3;flex-basis:100%;padding-bottom:2px}.hero{grid-template-columns:1fr}.hero-art{min-height:290px}.grid{grid-template-columns:repeat(2,1fr)}.quizlayout,.simgrid{grid-template-columns:1fr}.quizside{grid-template-columns:1fr 1fr}.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){main{padding:20px 14px 48px}.topinner{padding:10px 14px}.brand small{display:none}.top-actions .iconbtn{padding:8px}.hero{padding-top:5px;gap:8px}.hero-art{min-height:250px;border-radius:24px}.orbit{width:190px;height:190px}.face{width:95px;height:95px;font-size:43px}.float{font-size:11px;padding:8px 10px}.f1{top:18px;left:12px}.f2{right:10px;top:78px}.f3{bottom:18px;left:14px}.f4{right:10px;bottom:18px}.stats,.grid,.materialgrid,.journalgrid,.twofield{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.step{padding:14px}.quizside{grid-template-columns:1fr}.qtext{font-size:20px}.sectionhead,.pagehead{display:block}.sectionhead .btn{margin-top:12px}.formula{flex-wrap:wrap}.formula div{min-width:40%}.codeform{flex-wrap:wrap}.codeform input{flex-basis:100%}.formcard{padding:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+ <div class="topinner">
+  <a href="#" class="brand" onclick="showPage('home');return false" aria-label="LAB EMOSI Beranda">
+   <div class="brandmark">☁️</div><div><strong>LAB EMOSI</strong><small>Pahami Emosimu, Pilih Responsmu</small></div>
+  </a>
+  <nav class="nav" aria-label="Navigasi utama">
+   <button data-page="home" class="active">Beranda</button>
+   <button data-page="quiz">Kuis Awal</button>
+   <button data-page="learn">Kenali Regulasi Emosi</button>
+   <button data-page="guide">Panduan Bermain Peran</button>
+   <button data-page="sim">Ruang Simulasi</button>
+   <button data-page="journal">Jurnal Refleksi</button>
+   <button data-page="about">Tentang</button>
+  </nav>
+  <div class="top-actions"><button class="iconbtn" onclick="showPage('journal')" title="Buka jurnal">✎ Jurnal</button></div>
+ </div>
+</header>
+<main>
+<section class="page active" id="page-home">
+ <div class="hero">
+  <div class="hero-copy">
+   <div class="eyebrow">Ruang belajar regulasi emosi</div>
+   <h1>Pahami emosimu.<br><span>Pilih responsmu.</span></h1>
+   <p class="lead">Setiap orang punya emosi. Di LAB EMOSI, kamu diajak mengenali apa yang dirasakan, mengambil jeda, memikirkan pilihan, dan menentukan respons yang lebih sesuai.</p>
+   <div class="buttonrow"><button class="btn primary" onclick="showPage('quiz')">Mulai kegiatan <span>→</span></button><button class="btn outline" onclick="showPage('learn')">Kenali regulasi emosi</button></div>
+   <p class="tiny" style="margin-top:16px">Tidak ada emosi yang perlu dipermalukan. Kita belajar memilih tindakan yang membantu diri sendiri dan orang lain.</p>
+  </div>
+  <div class="hero-art" aria-label="Ilustrasi simbolis emosi">
+   <div class="float f1">🌿 Ambil jeda</div><div class="float f2">💭 Kenali pikiran</div><div class="float f3">💜 Pahami diri</div><div class="float f4">✨ Pilih respons</div>
+   <div class="orbit"><div class="face">☺️</div></div>
+  </div>
+ </div>
+ <div class="stats">
+  <div class="stat"><strong>4P</strong><span>Alur latihan regulasi emosi</span></div>
+  <div class="stat"><strong>20</strong><span>Situasi pada kuis awal</span></div>
+  <div class="stat"><strong>Praktik</strong><span>Simulasi dan refleksi pengalaman</span></div>
+ </div>
+ <div class="sectionhead"><div><div class="eyebrow">Alur kegiatan</div><h2>Belajar selangkah demi selangkah</h2><p>Ikuti alur yang disarankan. Kamu juga bisa membuka halaman lain melalui menu di atas.</p></div></div>
+ <div class="steps">
+  <div class="step"><b>01 · PERCEIVE</b><strong>Perhatikan</strong><span>Kenali situasi, pemicu, dan emosi yang muncul.</span></div>
+  <div class="step"><b>02 · PAUSE</b><strong>Ambil jeda</strong><span>Beri ruang sebelum bereaksi secara spontan.</span></div>
+  <div class="step"><b>03 · PROCESS</b><strong>Olah pilihan</strong><span>Pertimbangkan strategi dan kemungkinan respons.</span></div>
+  <div class="step"><b>04 · PROCEED</b><strong>Pilih tindakan</strong><span>Coba respons yang sesuai, lalu refleksikan hasilnya.</span></div>
+ </div>
+ <div class="sectionhead"><div><div class="eyebrow">Jelajahi LAB EMOSI</div><h2>Ruang yang bisa kamu gunakan</h2></div></div>
+ <div class="grid">
+  <article class="card softlav"><div class="cardicon">🧭</div><h3>Kuis Awal</h3><p>Meninjau pilihan strategi dan respons pada berbagai situasi. Hasilnya untuk refleksi, bukan diagnosis.</p><button class="btn secondary" onclick="showPage('quiz')">Buka kuis →</button></article>
+  <article class="card softsage"><div class="cardicon">🌱</div><h3>Kenali Regulasi Emosi</h3><p>Pelajari emosi, pemicu, tanda tubuh, dan cara memilih tindakan dengan lebih sadar.</p><button class="btn sagebtn" onclick="showPage('learn')">Pelajari →</button></article>
+  <article class="card softpeach"><div class="cardicon">🎭</div><h3>Ruang Simulasi</h3><p>Gunakan kode pada undian situasi fisik untuk berlatih membandingkan respons.</p><button class="btn outline" onclick="showPage('sim')">Mulai simulasi →</button></article>
+ </div>
+ <div class="notice" style="margin-top:20px">💡 <b>Ingat:</b> respons adaptif bukan berarti selalu mengalah atau menyembunyikan emosi. Menetapkan batasan, menolak dengan sopan, menjauh dari situasi yang tidak aman, dan meminta bantuan juga dapat menjadi pilihan yang tepat.</div>
+</section>
+
+<section class="page" id="page-quiz">
+ <div class="pagehead"><div><div class="eyebrow">Kegiatan 01 · Perceive</div><h2>Kuis Awal</h2><p>Baca setiap situasi, lalu pilih strategi yang akan kamu gunakan dan respons yang paling mungkin kamu lakukan. Pilih jawaban yang paling mendekati dirimu saat ini—bukan jawaban yang menurutmu paling disukai orang lain.</p></div><span class="pill">20 situasi · 40 pilihan</span></div>
+ <div class="notice sage" style="margin-bottom:18px">Kuis ini merupakan bahan refleksi pembelajaran, bukan tes psikologis atau alat diagnosis. Hasil bersifat pribadi dan tidak ditampilkan sebagai peringkat.</div>
+ <div class="quizlayout">
+  <div class="quizcard">
+   <div class="qnum" id="qnum">SITUASI 01 DARI 20</div><div class="progresswrap"><div class="progressbar" id="qprogress"></div></div>
+   <div class="qtext" id="qtext"></div>
+   <span class="fieldlabel">A. Strategi apa yang paling mungkin kamu pilih?</span><div class="choices" id="strategychoices"></div>
+   <span class="fieldlabel">B. Respons apa yang paling mungkin kamu lakukan?</span><div class="choices" id="responsechoices"></div>
+   <div class="quiznav"><button class="btn outline" id="qprev" onclick="moveQuiz(-1)">← Sebelumnya</button><button class="btn primary" id="qnext" onclick="moveQuiz(1)">Berikutnya →</button></div>
+  </div>
+  <aside class="quizside">
+   <div class="sidebox"><strong>Progres kuis</strong><p id="qanswered">0 dari 20 situasi dijawab lengkap</p><div class="progresswrap"><div class="progressbar" id="answerprogress"></div></div><div class="qjump" id="qjump"></div></div>
+   <div class="sidebox"><strong>Tips mengisi</strong><p>Bayangkan situasi itu benar-benar terjadi. Tidak perlu terburu-buru. Kamu boleh kembali dan mengganti jawaban sebelum melihat hasil.</p></div>
+  </aside>
+ </div>
+ <div id="quizresult" class="card" style="display:none;margin-top:20px">
+  <div class="eyebrow">Ringkasan pribadi</div><h2>Kuis awal selesai</h2><p id="resultscore"></p><p class="muted" id="resultmessage"></p><div class="buttonrow"><button class="btn primary" onclick="showPage('learn')">Lanjut ke materi →</button><button class="btn outline" onclick="restartQuiz()">Ulangi kuis</button></div>
+ </div>
+</section>
+
+<section class="page" id="page-learn">
+ <div class="pagehead"><div><div class="eyebrow">Kegiatan 02 · Pause & Process</div><h2>Kenali Regulasi Emosi</h2><p>Emosi adalah bagian wajar dari pengalaman manusia. Kita tidak selalu bisa memilih emosi pertama yang muncul, tetapi kita dapat belajar mengenali dan mengatur cara meresponsnya.</p></div><span class="pill">Materi singkat</span></div>
+ <div class="materialgrid">
+  <article class="material"><div class="number">01 · KENALI</div><h3>Apa itu emosi?</h3><p>Emosi adalah pengalaman yang melibatkan perasaan, pikiran, perubahan tubuh, dan dorongan untuk bertindak. Marah, sedih, takut, malu, kecewa, dan senang sama-sama dapat muncul dalam kehidupan sehari-hari.</p><div class="notice sage">Emosi bukan tindakan. Merasa marah tidak otomatis berarti kita harus membentak atau menyakiti orang lain.</div></article>
+  <article class="material"><div class="number">02 · AMATI</div><h3>Kenali pemicu dan tanda tubuh</h3><p>Pemicu bisa berupa ucapan teman, tugas yang sulit, salah paham, penolakan, atau situasi yang terasa tidak adil.</p><ul><li>Napas menjadi cepat atau terasa pendek.</li><li>Otot menegang, wajah terasa panas, atau tangan mengepal.</li><li>Pikiran berulang, ingin langsung membalas, atau ingin menghindar.</li></ul><p>Tanda setiap orang bisa berbeda. Cukup amati tanpa menghakimi diri sendiri.</p></article>
+  <article class="material"><div class="number">03 · BEDAKAN</div><h3>Fakta, pikiran, dan dugaan</h3><p>Ketika emosi kuat, kita kadang langsung menyimpulkan maksud orang lain. Cobalah memisahkan apa yang benar-benar terjadi dari dugaan yang muncul.</p><ul><li><b>Fakta:</b> “Pesanku belum dibalas sejak pagi.”</li><li><b>Dugaan:</b> “Dia pasti tidak menyukaiku.”</li><li><b>Pertanyaan:</b> “Adakah penjelasan lain yang mungkin?”</li></ul></article>
+  <article class="material"><div class="number">04 · PILIH</div><h3>Regulasi emosi bukan menekan emosi</h3><p>Regulasi emosi adalah proses memengaruhi bagaimana emosi muncul, dirasakan, dan diekspresikan agar kita dapat merespons situasi dengan lebih sesuai.</p><p>Kamu boleh mengakui perasaan, meminta jeda, menyampaikan batasan, mencari solusi, atau meminta bantuan. Tidak semua strategi cocok untuk semua situasi.</p></article>
+ </div>
+ <div class="sectionhead"><div><div class="eyebrow">Kerangka latihan LAB EMOSI</div><h2>Ingat alur 4P</h2></div></div>
+ <div class="formula"><div><b>Perceive</b><span>Perhatikan situasi</span></div><div><b>Pause</b><span>Ambil jeda</span></div><div><b>Process</b><span>Olah pilihan</span></div><div><b>Proceed</b><span>Pilih tindakan</span></div></div>
+ <div class="notice">Strategi sederhana seperti bernapas perlahan atau menghitung sampai sepuluh bisa membantu sebagian orang mengambil jeda. Jika suatu cara tidak nyaman atau tidak membantu, pilih cara lain yang aman dan sesuai situasi.</div>
+ <div class="buttonrow"><button class="btn primary" onclick="showPage('guide')">Lanjut ke panduan bermain peran →</button><button class="btn outline" onclick="showPage('sim')">Buka simulasi</button></div>
+</section>
+
+<section class="page" id="page-guide">
+ <div class="pagehead"><div><div class="eyebrow">Kegiatan 03 · Persiapan</div><h2>Panduan Bermain Peran</h2><p>Gunakan undian situasi fisik yang disiapkan Guru BK. Website ini membantu latihan respons, bukan menggantikan diskusi dan pendampingan langsung.</p></div><span class="pill">Undian fisik + website</span></div>
+ <div class="grid">
+  <article class="card"><div class="cardicon">🎟️</div><h3>1. Ambil undian</h3><p>Setiap kertas situasi memiliki kode, misalnya <b>AK-01</b> atau <b>PS-02</b>. Masukkan kode yang sama pada Ruang Simulasi.</p></article>
+  <article class="card"><div class="cardicon">🎬</div><h3>2. Peragakan respons spontan</h3><p>Bagikan peran dan peragakan reaksi awal yang mungkin muncul. Tidak perlu berlebihan atau meniru pengalaman pribadi yang sensitif.</p></article>
+  <article class="card"><div class="cardicon">🌿</div><h3>3. Ambil jeda dan pilih strategi</h3><p>Diskusikan emosi, pemicu, dan strategi yang mungkin membantu. Pilih cara yang sesuai dengan situasi dan kenyamanan masing-masing.</p></article>
+  <article class="card"><div class="cardicon">💬</div><h3>4. Coba respons alternatif</h3><p>Peragakan kembali situasi dengan respons yang lebih terarah, misalnya menyampaikan perasaan, menetapkan batasan, atau meminta klarifikasi.</p></article>
+  <article class="card"><div class="cardicon">🔎</div><h3>5. Bandingkan dampaknya</h3><p>Bahas kemungkinan dampak dari respons spontan dan alternatif terhadap diri sendiri, orang lain, dan penyelesaian masalah.</p></article>
+  <article class="card"><div class="cardicon">📝</div><h3>6. Refleksikan pengalaman</h3><p>Catat hal yang dipelajari di Jurnal Refleksi. Kamu tidak wajib membagikan isi jurnal pribadi kepada teman.</p></article>
+ </div>
+ <div class="sectionhead"><div><h2>Kesepakatan bersama</h2><p>Supaya latihan tetap aman dan saling menghargai.</p></div></div>
+ <div class="card">
+  <ul>
+   <li>Gunakan situasi sebagai bahan belajar; hindari menyebut atau menyindir teman tertentu.</li>
+   <li>Jangan memaksa teman menceritakan pengalaman pribadi atau memainkan peran yang membuatnya tidak nyaman.</li>
+   <li>Berikan tanggapan terhadap pilihan respons, bukan memberi label pada orangnya.</li>
+   <li>Respons adaptif tidak selalu berarti mengalah. Menolak, menetapkan batasan, menjauh, dan meminta bantuan bisa menjadi pilihan yang tepat.</li>
+   <li>Jika situasi berkaitan dengan perundungan berulang, ancaman, atau keselamatan, sampaikan kepada Guru BK atau orang dewasa tepercaya.</li>
+  </ul>
+  <button class="btn primary" onclick="showPage('sim')">Buka Ruang Simulasi →</button>
+ </div>
+</section>
+
+<section class="page" id="page-sim">
+ <div class="pagehead"><div><div class="eyebrow">Kegiatan 04 · Proceed</div><h2>Ruang Simulasi</h2><p>Masukkan kode dari undian situasi fisik. Baca situasi, tuliskan respons spontan, pilih strategi, lalu susun respons alternatif yang ingin dicoba.</p></div><span class="pill">Simulasi bermain peran</span></div>
+ <div class="simgrid">
+  <div class="simmain">
+   <div class="card">
+    <h3>Masukkan kode situasi</h3><p class="muted small">Contoh kode: AK-01, PS-02, HD-03, KT-04, TS-01. Kode membantu menemukan situasi yang sama dengan undian fisik.</p>
+    <form class="codeform" id="codeform"><input id="scenarioCode" placeholder="Contoh: AK-01" aria-label="Kode situasi" maxlength="8" required><button class="btn primary" type="submit">Tampilkan situasi</button></form>
+    <p class="tiny" style="margin:10px 0 0">Jika belum memiliki undian, Guru BK dapat membagikan kode situasi untuk latihan. Website tidak mengundi situasi secara otomatis.</p>
+   </div>
+   <div id="scenarioDisplay" class="scenariobox">
+    <div class="scenario-meta"><span class="pill">Belum ada situasi</span></div><div class="scenario-title">Situasi akan muncul di sini</div><p class="scenario-desc">Masukkan kode yang tertera pada kertas undian fisik untuk memulai simulasi.</p>
+   </div>
+   <div class="simstep">
+    <h3><span class="tag">1</span> Respons spontan</h3><p class="muted small">Apa yang mungkin kamu lakukan atau katakan pada reaksi pertama? Ini bukan untuk menilai atau mempermalukanmu.</p><textarea id="spontaneous" placeholder="Misalnya, aku mungkin langsung membalas dengan nada tinggi..."></textarea>
+   </div>
+   <div class="simstep">
+    <h3><span class="tag">2</span> Pilih strategi regulasi emosi</h3><p class="muted small">Pilih satu atau lebih strategi yang terasa sesuai. Tidak semua strategi cocok untuk setiap situasi.</p><div id="strategyBank" class="banklist"></div>
+   </div>
+   <div class="simstep">
+    <h3><span class="tag">3</span> Susun respons alternatif</h3><p class="muted small">Pilih contoh untuk membantu memulai, lalu ubah agar sesuai dengan situasi. Kamu boleh menulis respons sendiri.</p><div id="responseBank" class="banklist"></div><label class="fieldlabel" for="alternative">Respons yang ingin dicoba</label><textarea id="alternative" placeholder="Tuliskan respons alternatifmu di sini..."></textarea>
+   </div>
+   <div class="simstep">
+    <h3><span class="tag">4</span> Refleksi singkat</h3>
+    <div class="formrow"><label for="simimpact">Apa kemungkinan dampak respons alternatif ini?</label><textarea id="simimpact" placeholder="Misalnya, masalah bisa dibicarakan tanpa saling merendahkan..."></textarea></div>
+    <div class="formrow"><label for="simlearning">Apa yang kamu pelajari?</label><textarea id="simlearning" placeholder="Aku belajar bahwa..."></textarea></div>
+    <div class="buttonrow"><button class="btn primary" onclick="saveSimToJournal()">Simpan refleksi ke jurnal</button><button class="btn outline" onclick="clearSimNotes()">Kosongkan jawaban simulasi</button></div>
+   </div>
+  </div>
+  <aside class="simside">
+   <div class="sidebox"><strong>Strategi regulasi emosi</strong><p>Gunakan untuk mengambil jeda, bukan untuk menghilangkan emosi dengan paksa.</p><button class="btn outline" style="margin-top:12px" onclick="showPage('learn')">Baca materi</button></div>
+   <div class="sidebox"><strong>Butuh contoh respons?</strong><p>Pilih contoh, lalu sesuaikan dengan kebutuhan dan batasanmu.</p></div>
+   <div class="notice sage">💡 Tujuan latihan bukan menemukan satu jawaban yang sempurna, melainkan mempertimbangkan pilihan yang aman, sesuai, dan menghargai diri sendiri serta orang lain.</div>
+  </aside>
+ </div>
+</section>
+
+<section class="page" id="page-journal">
+ <div class="pagehead"><div><div class="eyebrow">Ruang pribadi</div><h2>Jurnal Refleksi</h2><p>Tuliskan pengalamanmu seperlunya. Kamu boleh merefleksikan situasi simulasi atau pengalaman sehari-hari yang terasa aman untuk ditulis.</p></div><span class="pill">Tersimpan di perangkat</span></div>
+ <div class="notice" style="margin-bottom:18px">🔒 Jurnal pada versi demo ini tersimpan di penyimpanan browser perangkat yang sedang digunakan, bukan terkirim ke Guru BK atau server. Jika memakai perangkat bersama, jangan tuliskan informasi sensitif dan hapus catatan setelah digunakan.</div>
+ <div class="journalgrid">
+  <form id="journalForm" class="formcard">
+   <h3>Tulis refleksi baru</h3>
+   <div class="formrow"><label for="jdate">Tanggal</label><input id="jdate" type="date" required></div>
+   <div class="formrow"><label for="jemotion">Emosi yang dirasakan</label><select id="jemotion" required><option value="">Pilih emosi</option><option>Senang</option><option>Sedih</option><option>Marah</option><option>Cemas</option><option>Malu</option><option>Kecewa</option><option>Bingung</option><option>Lelah</option><option>Emosi lain</option></select></div>
+   <div class="formrow"><label for="jsituation">Apa yang terjadi?</label><textarea id="jsituation" required placeholder="Tuliskan situasinya secara singkat..."></textarea></div>
+   <div class="formrow"><label for="jthought">Apa yang kamu pikirkan atau rasakan di tubuhmu?</label><textarea id="jthought" required placeholder="Misalnya, aku merasa kecewa dan bahuku menegang..."></textarea></div>
+   <div class="formrow"><label for="jresponse">Respons apa yang kamu pilih atau ingin coba?</label><textarea id="jresponse" required placeholder="Aku memilih untuk..."></textarea></div>
+   <div class="formrow"><label for="jlesson">Apa yang kamu pelajari dari pengalaman ini?</label><textarea id="jlesson" required placeholder="Aku menyadari bahwa..."></textarea></div>
+   <div class="buttonrow"><button class="btn primary" type="submit">Simpan jurnal di perangkat</button><button class="btn outline" type="button" onclick="resetJournalForm()">Kosongkan formulir</button></div>
+  </form>
+  <div>
+   <div class="sectionhead" style="margin-top:0"><div><h3>Catatan tersimpan di perangkat ini</h3><p class="small" id="journalCount">Belum ada catatan.</p></div><button class="btn danger" id="deleteAllBtn" onclick="confirmDeleteAll()" style="font-size:12px">Hapus semua</button></div>
+   <div id="journalEntries" class="savedlist"><div class="empty">📝<br><br>Catatan yang kamu simpan akan muncul di sini.</div></div>
+  </div>
+ </div>
+</section>
+
+<section class="page" id="page-about">
+ <div class="pagehead"><div><div class="eyebrow">Tentang media</div><h2>LAB EMOSI</h2><p>Media simulasi interaktif untuk melatih pemilihan strategi dan respons regulasi emosi siswa.</p></div><span class="pill">Versi prototipe</span></div>
+ <div class="grid">
+  <article class="card softlav"><div class="cardicon">🎯</div><h3>Tujuan</h3><p>Mendukung peserta didik mengenali emosi, mempertimbangkan strategi regulasi emosi, dan berlatih memilih respons yang lebih sesuai melalui simulasi dan refleksi.</p></article>
+  <article class="card softsage"><div class="cardicon">🧩</div><h3>Kerangka 4P</h3><p>Perceive, Pause, Process, Proceed digunakan sebagai alur latihan pembelajaran. Kerangka ini merupakan rancangan alur media, bukan tahapan resmi dari CASEL.</p></article>
+  <article class="card softpeach"><div class="cardicon">🔐</div><h3>Privasi</h3><p>Data jurnal disimpan di browser perangkat ini. Kuis awal disimpan sementara selama halaman terbuka dan tidak dikirim ke server. Hindari mencatat informasi pribadi yang sensitif.</p></article>
+ </div>
+ <div class="card" style="margin-top:18px"><h3>Catatan penggunaan</h3><p class="muted">LAB EMOSI dirancang sebagai media pendukung kegiatan pembelajaran sosial-emosional. Media ini bukan alat diagnosis dan tidak menggantikan pendampingan Guru BK. Guru BK tetap perlu memfasilitasi diskusi, memastikan suasana aman, dan membantu siswa yang membutuhkan dukungan lebih lanjut.</p><p class="muted">Prototipe ini belum menggunakan akun pengguna, server, analitik, atau sistem pengiriman jurnal. Jika perangkat digunakan bersama, setiap pengguna sebaiknya menghapus catatan setelah selesai.</p><div class="buttonrow"><button class="btn primary" onclick="showPage('home')">Kembali ke beranda</button><button class="btn outline" onclick="showPage('journal')">Buka jurnal</button></div></div>
+</section>
+</main>
+<footer class="footer">LAB EMOSI · Pahami Emosimu, Pilih Responsmu · Media pembelajaran regulasi emosi</footer>
+</div>
+
+<div class="modalback" id="modalback" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="modal"><h3 id="modalTitle">Konfirmasi</h3><p id="modalText" class="muted"></p><div class="buttonrow"><button class="btn danger" id="modalConfirm">Ya, hapus</button><button class="btn outline" onclick="closeModal()">Batal</button></div></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const situations = [
+ {code:"AK-01",cat:"Akademik",title:"Usaha yang Diremehkan",text:"Kamu sudah berusaha mengerjakan tugas dengan sungguh-sungguh. Ketika hasilnya kamu tunjukkan, seorang teman berkata bahwa usahamu tidak ada gunanya.",short:"Usahamu mengerjakan tugas diremehkan teman.",focus:"Menghadapi kritik dan menjaga penghargaan terhadap usaha diri."},
+ {code:"AK-02",cat:"Akademik",title:"Dipermalukan karena Hasil Kerja",text:"Saat hasil tugas kelompok dibahas, seorang teman menertawakan bagian yang kamu kerjakan dan mengomentarinya di depan teman-teman lain.",short:"Bagian tugasmu ditertawakan di depan teman.",focus:"Menyampaikan keberatan dan meminta masukan secara saling menghargai."},
+ {code:"AK-03",cat:"Akademik",title:"Dituduh Tidak Bertanggung Jawab",text:"Guru mengatakan kamu belum mengumpulkan tugas, padahal kamu merasa sudah mengirimkannya. Beberapa teman mendengar teguran itu.",short:"Kamu ditegur karena dianggap belum mengumpulkan tugas.",focus:"Mengelola rasa malu dan mengklarifikasi fakta."},
+ {code:"AK-04",cat:"Akademik",title:"Dibandingkan dengan Teman",text:"Keluarga atau teman membandingkan nilai kamu dengan nilai teman lain dan mengatakan kamu seharusnya bisa lebih baik.",short:"Nilaimu dibandingkan dengan nilai teman.",focus:"Menghadapi perbandingan dan menentukan langkah perbaikan."},
+ {code:"PS-01",cat:"Pertemanan",title:"Sengaja Tidak Diajak",text:"Kamu mengetahui bahwa beberapa teman pergi bersama setelah sekolah. Mereka mengakui sengaja tidak mengajakmu, tetapi tidak menjelaskan alasannya.",short:"Teman mengakui sengaja tidak mengajakmu.",focus:"Menyampaikan perasaan, mencari kejelasan, dan menjaga harga diri."},
+ {code:"PS-02",cat:"Pertemanan",title:"Janji Pertemanan yang Dibatalkan",text:"Kamu sudah mengatur waktu untuk belajar bersama seorang teman. Menjelang waktu yang disepakati, teman itu membatalkan rencana tanpa memberi penjelasan yang jelas.",short:"Teman membatalkan janji belajar tanpa penjelasan jelas.",focus:"Menyampaikan kekecewaan dan membicarakan harapan."},
+ {code:"PS-03",cat:"Pertemanan",title:"Diabaikan oleh Kelompok Pertemanan",text:"Ketika kamu bergabung dalam percakapan kelompok, teman-teman terus berbicara satu sama lain dan beberapa kali tidak menanggapi ucapanmu.",short:"Ucapanmu berulang kali tidak ditanggapi kelompok teman.",focus:"Memeriksa situasi dan memilih cara menjaga kebutuhan sosial."},
+ {code:"PS-04",cat:"Pertemanan",title:"Ucapan yang Disalahartikan",text:"Seorang teman tersinggung dengan ucapanmu. Kamu merasa tidak bermaksud menyakitinya, tetapi percakapan mulai memanas.",short:"Teman tersinggung oleh ucapan yang tidak kamu maksudkan begitu.",focus:"Klarifikasi, mendengarkan, dan memperbaiki komunikasi."},
+ {code:"HD-01",cat:"Harga diri",title:"Penampilan Dijadikan Bahan Tertawaan",text:"Saat berada bersama teman-teman, seseorang mengomentari penampilanmu dengan cara yang membuat orang lain tertawa. Kamu merasa tidak nyaman.",short:"Penampilanmu dijadikan bahan tertawaan.",focus:"Menetapkan batasan dan mencari dukungan bila berulang."},
+ {code:"HD-02",cat:"Harga diri",title:"Kesalahan Presentasi Terus Diungkit",text:"Kamu pernah salah mengucapkan kata saat presentasi. Beberapa hari kemudian, seorang teman masih mengulang kesalahan itu untuk membuat orang lain tertawa.",short:"Kesalahan presentasimu terus diungkit untuk ditertawakan.",focus:"Menyampaikan batasan dan menghadapi rasa malu."},
+ {code:"HD-03",cat:"Harga diri",title:"Pendapat Direndahkan",text:"Dalam diskusi kelas, kamu menyampaikan ide. Seorang teman langsung menyebut ide itu bodoh tanpa menjelaskan alasan atau memberi kesempatan untuk berbicara.",short:"Pendapatmu disebut bodoh tanpa penjelasan.",focus:"Meminta kritik yang spesifik tanpa menerima penghinaan."},
+ {code:"HD-04",cat:"Harga diri",title:"Julukan yang Tidak Diinginkan",text:"Seorang teman terus memanggilmu dengan julukan yang tidak kamu sukai, meskipun kamu sudah menunjukkan bahwa kamu tidak nyaman.",short:"Teman terus memakai julukan yang tidak kamu sukai.",focus:"Menegaskan batasan dan mencari bantuan bila tidak dihormati."},
+ {code:"KT-01",cat:"Konflik",title:"Barang Pinjaman Rusak",text:"Buku yang kamu pinjamkan kepada teman kembali dalam keadaan rusak. Temanmu mengatakan kerusakan itu tidak sengaja dan tidak tahu harus berbuat apa.",short:"Buku pinjamanmu kembali dalam keadaan rusak.",focus:"Menyampaikan dampak dan mencari penyelesaian."},
+ {code:"KT-02",cat:"Konflik",title:"Tugas Rusak karena Kecerobohan Teman",text:"Catatan atau bahan tugas yang kamu siapkan terkena tumpahan minuman ketika teman di dekatmu tidak berhati-hati. Sebagian bahan menjadi sulit dibaca.",short:"Bahan tugasmu rusak karena minuman tumpah.",focus:"Mengungkapkan kekesalan dan membagi langkah perbaikan."},
+ {code:"KT-03",cat:"Konflik",title:"Disalahkan atas Kelalaian Teman",text:"Dalam tugas kelompok, seorang teman terlambat mengerjakan bagiannya, tetapi ketika guru bertanya, ia mengatakan bahwa keterlambatan terjadi karena kamu tidak mengingatkannya.",short:"Teman menyalahkanmu atas keterlambatan bagian tugasnya.",focus:"Menjelaskan fakta tanpa memperbesar konflik."},
+ {code:"KT-04",cat:"Konflik",title:"Tidak Sengaja Menghapus Slide Teman",text:"Saat membantu mengedit presentasi kelompok, kamu tidak sengaja menghapus satu slide penting yang dibuat teman. Teman itu terlihat kesal karena presentasi akan segera dikumpulkan.",short:"Kamu tidak sengaja menghapus slide penting milik teman.",focus:"Mengakui kesalahan, bertanggung jawab, dan mencari solusi."},
+ {code:"TS-01",cat:"Tekanan sosial",title:"Ditekan untuk Memberikan Jawaban Tugas",text:"Seorang teman mendesakmu mengirim jawaban tugas untuk disalin. Kamu khawatir ia akan marah atau menjauh jika kamu menolak.",short:"Teman mendesakmu memberi jawaban untuk disalin.",focus:"Menolak dengan tegas sambil tetap menawarkan bantuan yang sesuai."},
+ {code:"TS-02",cat:"Tekanan sosial",title:"Takut Dijauhi karena Menolak Ajakan",text:"Teman mengajakmu melakukan sesuatu padahal kamu masih perlu menyelesaikan tugas. Mereka berkata kamu tidak asyik jika menolak.",short:"Teman mengatakan kamu tidak asyik jika menolak ajakan.",focus:"Membuat pilihan sesuai prioritas dan menghadapi tekanan teman."},
+ {code:"TS-03",cat:"Tekanan sosial",title:"Sulit Menolak Permintaan Bantuan",text:"Seorang teman sering meminta bantuan tugas mendekati tenggat. Kali ini tugasmu sendiri juga belum selesai, tetapi kamu merasa bersalah jika menolak.",short:"Teman meminta bantuan saat tugasmu sendiri belum selesai.",focus:"Menetapkan batasan dan menawarkan bantuan yang realistis."},
+ {code:"TS-04",cat:"Tekanan sosial",title:"Ekskul Berbenturan dengan Keputusan Keluarga",text:"Kamu ingin mengikuti kegiatan ekstrakurikuler yang sudah lama kamu minati, tetapi keluarga meminta kamu menggunakan waktu tersebut untuk membantu di rumah. Kamu ingin keduanya dipertimbangkan.",short:"Minat ekskulmu berbenturan dengan kebutuhan keluarga.",focus:"Mengomunikasikan kebutuhan dan mencari kesepakatan realistis."}
+];
+const strategies=[
+ "Tarik napas perlahan","Lakukan peregangan ringan","Minum air","Butterfly taps (ketukan lembut bergantian di bahu)","Peluk diri sendiri atau tekan lengan dengan lembut jika nyaman","Amati benda atau warna di sekitar","Gerakkan tubuh sebentar jika situasi memungkinkan","Hitung perlahan sampai 10","Ambil jeda sejenak sebelum menjawab","Bedakan fakta dan asumsi"
+];
+const responses=[
+ {cat:"Menyampaikan perasaan",text:"Aku merasa kecewa dengan kejadian tadi."},
+ {cat:"Menyampaikan perasaan",text:"Aku sedang kesal. Aku mau menenangkan diri sebentar sebelum membicarakannya."},
+ {cat:"Menyampaikan perasaan",text:"Aku merasa malu ketika hal itu dikatakan di depan teman-teman."},
+ {cat:"Menyampaikan batasan",text:"Aku kurang nyaman kalau kamu mengatakan itu kepadaku."},
+ {cat:"Menyampaikan batasan",text:"Aku tahu kamu mungkin bermaksud bercanda, tetapi aku tidak nyaman dijadikan bahan tertawaan."},
+ {cat:"Menyampaikan batasan",text:"Aku ingin kamu berhenti memanggilku dengan julukan itu karena aku tidak menyukainya."},
+ {cat:"Klarifikasi",text:"Boleh aku menjelaskan dulu maksudku?"},
+ {cat:"Klarifikasi",text:"Maksudku bukan menyindir kamu. Aku ingin menjelaskan supaya kita tidak salah paham."},
+ {cat:"Klarifikasi",text:"Bisa kamu jelaskan maksud ucapanmu tadi? Aku ingin memastikan aku tidak salah memahami."},
+ {cat:"Menolak dengan tegas",text:"Aku belum bisa membantu sekarang karena aku juga punya tugas yang harus diselesaikan."},
+ {cat:"Menolak dengan tegas",text:"Aku tidak bisa memberikan jawaban untuk disalin, tetapi aku bisa membantu menjelaskan caranya."},
+ {cat:"Menolak dengan tegas",text:"Aku ingin ikut, tetapi kali ini aku memilih menyelesaikan tugasku terlebih dahulu."},
+ {cat:"Bertanggung jawab",text:"Tadi aku tidak sengaja menghapus bagian itu. Maaf, ayo kita coba memperbaikinya."},
+ {cat:"Bertanggung jawab",text:"Aku paham kamu kecewa. Aku akan membantu mencari cara untuk menyelesaikan masalah ini."},
+ {cat:"Bertanggung jawab",text:"Aku keliru menyampaikan pendapat tadi. Aku akan mencoba memperbaikinya."},
+ {cat:"Mencari solusi",text:"Apa yang bisa kita lakukan supaya masalah ini bisa diselesaikan?"},
+ {cat:"Mencari solusi",text:"Bagaimana kalau kita membicarakannya satu per satu agar tidak saling menyalahkan?"},
+ {cat:"Mencari solusi",text:"Aku ingin kita mencari jalan keluar yang bisa diterima bersama."},
+ {cat:"Menghadapi kritik",text:"Aku akan mempertimbangkan masukanmu, tetapi aku juga ingin menjelaskan alasanku."},
+ {cat:"Menghadapi kritik",text:"Kita boleh punya pendapat berbeda. Bisa kita bahas idenya tanpa merendahkan satu sama lain?"},
+ {cat:"Menghadapi kritik",text:"Bagian mana yang menurutmu perlu diperbaiki? Aku ingin memahami masukanmu."},
+ {cat:"Mengambil jeda",text:"Aku belum siap membicarakan ini sekarang. Kita lanjutkan saat aku lebih tenang."},
+ {cat:"Mengambil jeda",text:"Aku tidak ingin memperkeruh keadaan, jadi aku akan mengambil jeda sebentar."},
+ {cat:"Mengambil jeda",text:"Aku ingin menyelesaikan masalah ini, tetapi aku perlu waktu untuk berpikir terlebih dahulu."}
+];
+const quizOptionsStrategy=[
+ {t:"Langsung membalas atau meluapkan kekesalan.",s:1},
+ {t:"Menghindar dan memendam perasaan tanpa mencari jalan keluar.",s:2},
+ {t:"Mencoba menenangkan diri, tetapi belum memikirkan langkah berikutnya.",s:3},
+ {t:"Mengambil jeda lalu mempertimbangkan beberapa pilihan.",s:4},
+ {t:"Mengambil jeda dan memilih strategi yang aman serta sesuai situasi.",s:5}
+];
+const quizOptionsResponse=[
+ {t:"Membentak, membalas, atau melakukan sesuatu yang bisa memperburuk keadaan.",s:1},
+ {t:"Diam atau pergi tanpa mempertimbangkan apakah perlu membicarakan masalahnya.",s:2},
+ {t:"Menanggapi dengan cukup tenang, tetapi belum jelas menyampaikan kebutuhan.",s:3},
+ {t:"Menyampaikan perasaan atau kebutuhan dengan cukup jelas dan sopan.",s:4},
+ {t:"Memilih respons yang tegas, menghargai diri dan orang lain, serta sesuai situasi.",s:5}
+];
+let quizIndex=0, quizAnswers=Array.from({length:20},()=>({strategy:null,response:null})), currentScenario=null, selectedStrategies=new Set();
+const $=id=>document.getElementById(id);
+function showPage(name){
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(name==='quiz')renderQuiz(); if(name==='journal')renderJournal(); if(name==='sim')renderBanks();
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderQuiz(){
+ const q=situations[quizIndex];$('qnum').textContent=`SITUASI ${String(quizIndex+1).padStart(2,'0')} DARI 20`;
+ $('qtext').textContent=q.short;$('qprogress').style.width=`${(quizIndex+1)/20*100}%`;
+ $('strategychoices').innerHTML=quizOptionsStrategy.map((o,i)=>choiceHTML(o.t,i,quizAnswers[quizIndex].strategy===i,'strategy',i)).join('');
+ $('responsechoices').innerHTML=quizOptionsResponse.map((o,i)=>choiceHTML(o.t,i,quizAnswers[quizIndex].response===i,'response',i)).join('');
+ $('qprev').disabled=quizIndex===0;$('qnext').textContent=quizIndex===19?'Lihat ringkasan':'Berikutnya →';
+ document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{
+  const type=b.dataset.type,idx=Number(b.dataset.choice);quizAnswers[quizIndex][type]=idx;renderQuiz();
+ }));
+ renderQuizProgress();
+}
+function choiceHTML(t,i,selected,type,idx){return `<button class="choice ${selected?'selected':''}" data-type="${type}" data-choice="${idx}"><span class="letter">${String.fromCharCode(65+i)}</span><span>${escapeHtml(t)}</span></button>`;}
+function renderQuizProgress(){
+ const count=quizAnswers.filter(a=>a.strategy!==null&&a.response!==null).length;
+ $('qanswered').textContent=`${count} dari 20 situasi dijawab lengkap`;$('answerprogress').style.width=`${count/20*100}%`;
+ $('qjump').innerHTML=situations.map((s,i)=>`<button class="${i===quizIndex?'current ':''}${quizAnswers[i].strategy!==null&&quizAnswers[i].response!==null?'done':''}" onclick="quizIndex=${i};renderQuiz()" aria-label="Buka situasi ${i+1}">${i+1}</button>`).join('');
+}
+function moveQuiz(d){
+ if(d>0&&quizIndex===19){const missing=quizAnswers.findIndex(a=>a.strategy===null||a.response===null);if(missing!==-1){quizIndex=missing;renderQuiz();toast('Lengkapi dua pilihan pada setiap situasi terlebih dahulu.');return;}finishQuiz();return;}
+ quizIndex=Math.max(0,Math.min(19,quizIndex+d));renderQuiz();
+}
+function finishQuiz(){
+ const total=quizAnswers.reduce((sum,a)=>sum+quizOptionsStrategy[a.strategy].s+quizOptionsResponse[a.response].s,0);
+ $('quizresult').style.display='block';$('resultscore').innerHTML=`<b>Skor refleksi: ${total} dari 200</b><br><span class="small muted">Rentang teoretis kuis: 40–200. Skor bukan ukuran nilai diri atau diagnosis.</span>`;
+ $('resultmessage').textContent=total<100?'Gunakan hasil ini sebagai kesempatan untuk mengenali situasi yang terasa menantang. Saat latihan, pilih satu strategi kecil yang ingin dicoba.':total<160?'Kamu sudah memilih beberapa pilihan yang cukup membantu. Materi dan simulasi dapat menjadi ruang untuk mencoba alternatif lain.':'Pilihanmu pada kuis ini cenderung adaptif. Kamu tetap bisa belajar bahwa strategi yang tepat dapat berubah sesuai situasi.';
+ $('quizresult').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function restartQuiz(){quizIndex=0;quizAnswers=Array.from({length:20},()=>({strategy:null,response:null}));$('quizresult').style.display='none';renderQuiz();window.scrollTo({top:0,behavior:'smooth'});}
+function renderBanks(){
+ $('strategyBank').innerHTML=strategies.map((s,i)=>`<label class="bankitem"><input type="checkbox" style="width:auto;margin-right:8px" value="${i}" ${selectedStrategies.has(i)?'checked':''} onchange="toggleStrategy(${i},this.checked)"> ${escapeHtml(s)}</label>`).join('');
+ $('responseBank').innerHTML=responses.map((r,i)=>`<div class="bankitem"><span class="tiny">${escapeHtml(r.cat)}</span><br>${escapeHtml(r.text)}<br><button class="btn outline" onclick="useResponse(${i})">Gunakan contoh ini</button></div>`).join('');
+}
+function toggleStrategy(i,on){if(on)selectedStrategies.add(i);else selectedStrategies.delete(i);}
+function useResponse(i){const val=responses[i].text;const el=$('alternative');el.value=el.value?el.value+'\n'+val:val;el.focus();toast('Contoh ditambahkan. Sesuaikan dengan situasimu.');}
+function loadScenario(code){
+ const clean=String(code||'').trim().toUpperCase().replace(/\s/g,'');const s=situations.find(x=>x.code===clean);
+ if(!s){toast('Kode belum ditemukan. Periksa kode pada kertas undian.');return;}
+ currentScenario=s;selectedStrategies=new Set();
+ $('scenarioCode').value=s.code;
+ $('scenarioDisplay').innerHTML=`<div class="scenario-meta"><span class="pill">${escapeHtml(s.code)}</span><span class="pill">${escapeHtml(s.cat)}</span></div><div class="scenario-title">${escapeHtml(s.title)}</div><p class="scenario-desc">${escapeHtml(s.text)}</p><div class="promptbox"><b>Fokus diskusi</b><p>${escapeHtml(s.focus)}</p></div>`;
+ $('spontaneous').value='';$('alternative').value='';$('simimpact').value='';$('simlearning').value='';
+ renderBanks();toast('Situasi berhasil ditampilkan.');
+}
+$('codeform').addEventListener('submit',e=>{e.preventDefault();loadScenario($('scenarioCode').value);});
+function clearSimNotes(){['spontaneous','alternative','simimpact','simlearning'].forEach(id=>$(id).value='');selectedStrategies=new Set();renderBanks();toast('Jawaban simulasi dikosongkan.');}
+function saveSimToJournal(){
+ if(!currentScenario){toast('Masukkan kode situasi terlebih dahulu.');return;}
+ const strategyText=[...selectedStrategies].map(i=>strategies[i]).join('; ');
+ const responseText=$('alternative').value.trim();
+ if(!$('spontaneous').value.trim()&&!responseText&&!$('simimpact').value.trim()&&!$('simlearning').value.trim()){toast('Isi setidaknya satu bagian refleksi terlebih dahulu.');return;}
+ const entry={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),date:today(),emotion:'Refleksi simulasi',situation:`${currentScenario.code} — ${currentScenario.title}\n${currentScenario.text}`,thought:`Respons spontan: ${$('spontaneous').value.trim()||'Belum ditulis.'}\nStrategi yang dipilih: ${strategyText||'Belum dipilih.'}`,response:responseText||'Belum ditulis.',lesson:`Dampak yang dipertimbangkan: ${$('simimpact').value.trim()||'Belum ditulis.'}\nPelajaran: ${$('simlearning').value.trim()||'Belum ditulis.'}`};
+ const all=getJournals();all.unshift(entry);saveJournals(all);toast('Refleksi simulasi tersimpan di jurnal perangkat.');showPage('journal');
+}
+const JOURNAL_KEY='labEmosiJournalV1';
+function getJournals(){try{const x=JSON.parse(localStorage.getItem(JOURNAL_KEY)||'[]');return Array.isArray(x)?x:[]}catch(e){return []}}
+function saveJournals(entries){try{localStorage.setItem(JOURNAL_KEY,JSON.stringify(entries));return true}catch(e){toast('Browser tidak dapat menyimpan data. Periksa pengaturan penyimpanan.');return false}}
+function today(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function resetJournalForm(){$('journalForm').reset();$('jdate').value=today();}
+$('journalForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const entry={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),date:$('jdate').value,emotion:$('jemotion').value,situation:$('jsituation').value.trim(),thought:$('jthought').value.trim(),response:$('jresponse').value.trim(),lesson:$('jlesson').value.trim()};
+ const all=getJournals();all.unshift(entry);if(saveJournals(all)){resetJournalForm();renderJournal();toast('Jurnal tersimpan di perangkat ini.');}
+});
+function renderJournal(){
+ if(!$('jdate').value)$('jdate').value=today();
+ const entries=getJournals();$('journalCount').textContent=entries.length?`${entries.length} catatan tersimpan di browser ini.`:'Belum ada catatan.';
+ $('deleteAllBtn').disabled=entries.length===0;
+ if(!entries.length){$('journalEntries').innerHTML='<div class="empty">📝<br><br>Belum ada catatan. Jurnal yang kamu simpan akan muncul di sini.</div>';return;}
+ $('journalEntries').innerHTML=entries.map(e=>`<article class="entry"><div class="entryhead"><div><span class="emotiontag">${escapeHtml(e.emotion)}</span><div class="tiny" style="margin-top:8px">${escapeHtml(e.date||'')}</div></div><span class="tiny">Catatan pribadi</span></div><h3>Apa yang terjadi?</h3><p>${escapeHtml(e.situation)}</p><h3>Pikiran atau tanda tubuh</h3><p>${escapeHtml(e.thought)}</p><h3>Respons yang dipilih</h3><p>${escapeHtml(e.response)}</p><h3>Pelajaran</h3><p>${escapeHtml(e.lesson)}</p><div class="entryactions"><button class="btn outline" style="font-size:12px" onclick="confirmDeleteEntry('${e.id}')">Hapus catatan ini</button></div></article>`).join('');
+}
+let modalAction=null;
+function openModal(title,msg,action){$('modalTitle').textContent=title;$('modalText').textContent=msg;modalAction=action;$('modalback').classList.add('show');}
+function closeModal(){$('modalback').classList.remove('show');modalAction=null;}
+$('modalConfirm').addEventListener('click',()=>{if(modalAction)modalAction();closeModal();});
+function confirmDeleteEntry(id){openModal('Hapus catatan ini?','Catatan yang dihapus tidak dapat dipulihkan dari website ini.',()=>{saveJournals(getJournals().filter(e=>e.id!==id));renderJournal();toast('Catatan dihapus.');});}
+function confirmDeleteAll(){if(!getJournals().length)return;openModal('Hapus semua catatan?','Semua jurnal yang tersimpan pada browser perangkat ini akan dihapus.',()=>{saveJournals([]);renderJournal();toast('Semua catatan dihapus.');});}
+let toastTimer;
+function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display='none',3000);}
+$('jdate').value=today();renderQuiz();renderJournal();
+</script>
+</body>
+</html>
